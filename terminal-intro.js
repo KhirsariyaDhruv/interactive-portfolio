@@ -35,8 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { text: " ", type: "text", delay: 100 },
         { text: "IDENTIFY YOURSELF:", type: "prompt", input: true, key: "name" },
         { text: " ", type: "text", delay: 100 },
-        { text: "ASSIGN SECURITY CLEARANCE:", type: "prompt", options: ["[1] CIVILIAN", "[2] TALENT_ACQUISITION"], input: true, key: "clearance" },
-        { text: " ", type: "text", delay: 100 },
         { text: "AUTHENTICATING...", type: "sys", delay: 600 },
         { text: "ACCESS GRANTED. DECRYPTING PORTFOLIO DATA...", type: "success", delay: 1000 },
         { ascii: `<span style="color:var(--primary); font-family:monospace; font-weight:bold; font-size: 14px; line-height: 1.2;">
@@ -166,23 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const val = input.value.trim();
             if (!val) return;
             
-            if (stepData.key === "clearance" && val !== "1" && val !== "2") {
-                input.disabled = true;
-                cursor.style.display = 'none';
-                document.removeEventListener('click', keepFocus);
-                
-                const errLine = document.createElement('div');
-                errLine.className = 'term-line term-sys';
-                errLine.style.color = 'var(--error)';
-                errLine.innerHTML = '<span class="term-text">INVALID CLEARANCE OVERRIDE. PLEASE ENTER 1 OR 2.</span>';
-                outputArea.appendChild(errLine);
-                
-                // Respawn prompt without repeating the options
-                setTimeout(() => {
-                    createInput({ ...stepData, options: null }, callback);
-                }, 300);
-                return;
-            }
+
             
             userData[stepData.key] = val;
             
@@ -221,12 +203,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 sessionStorage.setItem('introCompleted', 'true');
                 sessionStorage.setItem('termName', userData.name || '');
                 
-                let clearanceStr = userData.clearance;
-                if(clearanceStr === '1') clearanceStr = 'Civilian';
-                if(clearanceStr === '2') clearanceStr = 'Talent Acquisition';
-                sessionStorage.setItem('termClearance', clearanceStr || '');
+                sessionStorage.removeItem('termClearance'); // Clean up old data if it exists
                 
-                trackVisitor(userData.name, clearanceStr);
+                trackVisitor(userData.name, null);
                 
                 // Completely remove from DOM flow after fade
                 setTimeout(() => {

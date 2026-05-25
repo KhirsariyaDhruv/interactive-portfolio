@@ -168,7 +168,6 @@ async function fetchVisitors() {
                 <tr>
                     <td style="font-family:monospace; color:var(--secondary)">${v.visit_time}</td>
                     <td style="font-family:monospace; color:var(--primary)">${v.terminal_name || 'N/A'}</td>
-                    <td style="font-family:monospace; color:var(--primary)">${v.terminal_clearance || 'N/A'}</td>
                     <td>${v.ip_address}</td>
                     <td>${v.page_url}</td>
                     <td style="font-size:12px; color:var(--outline); max-width: 200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${v.user_agent}">${v.user_agent}</td>
