@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dhruv Khirsariya - CS Student & Security Researcher Portfolio">
+    <title>Dhruv Khirsariya | Kinetic Sentinel Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="folder.css?v=7">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="certificates-data.js?v=2"></script>
+    <script src="script.js?v=6"></script>
+</head>
+<body>
+    <!-- Terminal Intro Overlay -->
+    <div id="terminal-intro-overlay">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="terminal-title">guest@kinetic-sentinel:~$ | SECURE LOGIN</div>
+                <div class="terminal-status"><span class="status-dot-blink"></span> ONLINE</div>
+            </div>
+            <div class="terminal-body" id="terminal-output">
+                <!-- Dynamic text will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="liquid-ether-bg"></div>
+    <div id="pixel-snow-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4H20V20H4V4Z" stroke="white" stroke-width="2"/>
+                <path d="M8 8H16V16H8V8Z" fill="white"/>
+            </svg>
+            <span class="brand-text">DHRUV'S PORTFOLIO</span>
+        </div>
+        <div class="nav-links">
+            <a href="#home" class="active">HOME</a>
+            <a href="#about">ABOUT</a>
+            <a href="#skills">SKILLS</a>
+            <a href="#projects">PROJECTS</a>
+            <a href="#experience">EXPERIENCE</a>
+            <a href="#contact">CONTACT</a>
+        </div>
+        <a href="Dhruv_Khirsariya-Resume.pdf" target="_blank" class="btn-primary nav-resume">RESUME <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16L7 11L8.4 9.55L11 12.15V4H13V12.15L15.6 9.55L17 11L12 16ZM6 20C5.45 20 4.97917 19.8042 4.5875 19.4125C4.19583 19.0208 4 18.55 4 18V15H6V18H18V15H20V18C20 18.55 19.8042 19.0208 19.4125 19.4125C19.0208 19.8042 18.55 20 18 20H6Z" fill="#3a3000"/></svg></a>
+    </nav>
+
+    <main>
+        <!-- Home / Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span class="status-text">STATUS: SYSTEM<br>ONLINE</span>
+            </div>
+            
+            <div class="hero-content">
+                <h2 class="hero-name">DHRUV KHIRSARIYA</h2>
+                <h1 class="hero-title">// CS STUDENT &<br>SECURITY RESEARCHER</h1>
+                
+                <p class="hero-description">
+                    Building secure systems and real-world solutions through code. Passionate about ethical hacking, network security, and full-stack development.
+                </p>
+                
+                <div class="hero-actions">
+                    <a href="#projects" class="btn-primary hero-btn">
+                        VIEW PROJECTS 
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#3a3000" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/></svg>
+                    </a>
+                    <a href="Dhruv_Khirsariya-Resume.pdf" target="_blank" class="btn-ghost hero-btn">
+                        DOWNLOAD RESUME 
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20ZM12 19L8 15H10.5V12H13.5V15H16L12 19Z" fill="#e5e2e1"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="scroll-prompt">
+                <span class="scroll-text">SCROLL TO DECRYPT</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z" fill="#888"/></svg>
+            </div>
+        </section>
+
+        <!-- About & Skills Section -->
+        <section id="about" class="about-section">
+            <div class="section-header">
+                <h2 class="section-title">SYSTEM.IDENTITY</h2>
+                <p class="section-subtitle">// INITIALIZING USER PROFILE_</p>
+            </div>
+
+            <div class="about-container">
+                <div class="about-content">
+                    <div class="status-indicator nominal">
+                        <span class="status-dot"></span>
+                        <span class="status-text">STATUS: NOMINAL</span>
+                    </div>
+                    
+                    <h3 class="about-heading">ABOUT Dhruv</h3>
+                    
+                    <div class="terminal-text">
+                        <p><span class="prompt">&gt;</span> Executing bio.sh...</p>
+                        <br>
+                        <p><span class="prompt">&gt;</span> I am a Computer Science & Engineering student at CSPIT, CHARUSAT University — with a strong focus on cybersecurity, full-stack web development, and embedded systems. Scored 95.46% in Class 12 Science from Modi School, Rajkot.</p>
+                        <br>
+                        <p><span class="prompt">&gt;</span> Currently in Semester 4, actively building real-world projects — from POS billing systems to hardware rovers — while deepening my knowledge of ethical hacking, network security, and secure application design.</p>
+                        <br>
+                        <p><span class="prompt">&gt;</span> Student Coordinator at CyberKavach Club and Event Coordinator for 2 mega cybersecurity events with 300+ participants. I believe hands-on execution is the fastest path to mastery.</p>
+                        <br>
+                        <p><span class="prompt">&gt;</span> Open to internships, collaborations, and anything that breaks the ordinary.</p>
+                    </div>
+
+                    <div class="about-tags">
+                        <span class="tag">&gt; LOCATION: GUJARAT, IN</span>
+                        <span class="tag">&gt; CLEARANCE: LEVEL_0</span>
+                    </div>
+                </div>
+                
+                <div class="about-image-wrapper">
+                    <div class="image-corners"></div>
+                    <img src="profile.jpeg" alt="Dhruv Khirsariya" class="profile-img">
+                    <div class="image-id">ID: 0x8F4A</div>
+                </div>
+            </div>
+
+            <div class="skills-section" id="skills">
+                <div class="section-header">
+                    <h2 class="section-title">TECHNICAL CAPABILITIES</h2>
+                    <p class="section-subtitle">// LOADING SKILL_MATRIX_</p>
+                </div>
+
+                <div class="orbit-system-wrapper">
+                    <div class="orbit-system">
+                        <div class="orbit-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                        </div>
+
+                        <div class="orbit-ring ring-primary" style="width: 220px; height: 220px; animation-delay: 0s;"></div>
+                        <div class="orbit-ring ring-secondary" style="width: 360px; height: 360px; animation-delay: 1.5s;"></div>
+
+                        <!-- Inner Orbit: Languages (Radius 110px) -->
+                        <div class="orbit-node orbit-inner" style="--start-angle: 0deg;">
+                            <div class="orbit-container" style="--radius: 110px;">
+                                <div class="orbit-counter counter-inner">
+                                    <div class="orbit-item item-primary" style="--size: 40px;" data-label="C">
+                                        <span class="font-label-mono" style="font-weight: 700; font-size: 18px; color: #A8B9CC;">C</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit-node orbit-inner" style="--start-angle: 51.4deg;">
+                            <div class="orbit-container" style="--radius: 110px;">
+                                <div class="orbit-counter counter-inner">
+                                    <div class="orbit-item item-primary" style="--size: 40px;" data-label="C++">
+                                        <span class="font-label-mono" style="font-weight: 700; font-size: 16px; color: #00599C;">C++</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit-node orbit-inner" style="--start-angle: 102.8deg;">
+                            <div class="orbit-container" style="--radius: 110px;">
+                                <div class="orbit-counter counter-inner">
+                                    <div class="orbit-item item-primary" style="--size: 40px;" data-label="Java">
+                                        <span class="font-label-mono" style="font-weight: 700; font-size: 14px; color: #ED8B00;">JAVA</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit-node orbit-inner" style="--start-angle: 154.2deg;">
+                            <div class="orbit-container" style="--radius: 110px;">
+                                <div class="orbit-counter counter-inner">
+                                    <div class="orbit-item item-primary" style="--size: 40px;" data-label="HTML">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" class="orbit-icon"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" fill="#E34F26"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit-node orbit-inner" style="--start-angle: 205.7deg;">
+                            <div class="orbit-container" style="--radius: 110px;">
+                                <div class="orbit-counter counter-inner">
+                                    <div class="orbit-item item-primary" style="--size: 40px;" data-label="CSS">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" class="orbit-icon"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.751L12 19.351l5.379-1.443.744-8.157z" fill="#1572B6"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit-node orbit-inner" style="--start-angle: 257.1deg;">
+                            <div class="orbit-container" style="--radius: 110px;">
+                                <div class="orbit-counter counter-inner">
+                                    <div class="orbit-item item-primary" style="--size: 40px;" data-label="JavaScript">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" class="orbit-icon">
+                                            <rect width="24" height="24" fill="#F7DF1E"/>
+                                            <path d="M22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#323330"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit-node orbit-inner" style="--start-angle: 308.5deg;">
+                            <div class="orbit-container" style="--radius: 110px;">
+                                <div class="orbit-counter counter-inner">
+                                    <div class="orbit-item item-primary" style="--size: 40px;" data-label="PHP">
+                                        <span class="font-label-mono" style="font-weight: 700; font-size: 14px; color: #777BB4;">PHP</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Outer Orbit: Tools (Radius 180px) -->
+                        <div class="orbit-node orbit-outer" style="--start-angle: 25.7deg;">
+                            <div class="orbit-container" style="--radius: 180px;">
+                                <div class="orbit-counter counter-outer">
+                                    <div class="orbit-item item-secondary" style="--size: 45px;" data-label="Kali Linux">
+                                        <img src="logo/kali linux logo.png" alt="Kali Linux" class="orbit-icon" style="object-fit: contain;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit-node orbit-outer" style="--start-angle: 77.1deg;">
+                            <div class="orbit-container" style="--radius: 180px;">
+                                <div class="orbit-counter counter-outer">
+                                    <div class="orbit-item item-secondary" style="--size: 45px;" data-label="GitHub">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" class="orbit-icon" style="color: #ffffff; width: 24px; height: 24px;">
+                                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit-node orbit-outer" style="--start-angle: 128.5deg;">
+                            <div class="orbit-container" style="--radius: 180px;">
+                                <div class="orbit-counter counter-outer">
+                                    <div class="orbit-item item-secondary" style="--size: 45px;" data-label="PostgreSQL">
+                                        <img src="logo/PostgreSQL Logo.png" alt="PostgreSQL" class="orbit-icon" style="object-fit: contain;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit-node orbit-outer" style="--start-angle: 180deg;">
+                            <div class="orbit-container" style="--radius: 180px;">
+                                <div class="orbit-counter counter-outer">
+                                    <div class="orbit-item item-secondary" style="--size: 45px;" data-label="PHPMyAdmin">
+                                        <span class="font-label-mono" style="font-weight: 700; font-size: 14px; color: #F29F00;">PMA</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit-node orbit-outer" style="--start-angle: 231.4deg;">
+                            <div class="orbit-container" style="--radius: 180px;">
+                                <div class="orbit-counter counter-outer">
+                                    <div class="orbit-item item-secondary" style="--size: 45px;" data-label="MongoDB">
+                                        <img src="logo/mongodb logo.png" alt="MongoDB" class="orbit-icon" style="object-fit: contain;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit-node orbit-outer" style="--start-angle: 282.8deg;">
+                            <div class="orbit-container" style="--radius: 180px;">
+                                <div class="orbit-counter counter-outer">
+                                    <div class="orbit-item item-secondary" style="--size: 45px;" data-label="Antigravity">
+                                        <img src="logo/google-antigravity logo.png" alt="Antigravity" class="orbit-icon" style="object-fit: contain;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit-node orbit-outer" style="--start-angle: 334.2deg;">
+                            <div class="orbit-container" style="--radius: 180px;">
+                                <div class="orbit-counter counter-outer">
+                                    <div class="orbit-item item-secondary" style="--size: 45px;" data-label="VS Code">
+                                        <img src="logo/vs code logo.png" alt="VS Code" class="orbit-icon" style="object-fit: contain;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="section-header">
+                <h2 class="section-title">SYSTEM_PROJECTS</h2>
+                <p class="section-subtitle terminal-text" style="border: none; padding-left: 0;">&gt; Executing query: SELECT * FROM deployed_solutions WHERE status = 'operational'_</p>
+            </div>
+
+            <div class="projects-grid" id="dynamic-projects-grid">
+                <!-- Projects will be dynamically loaded here by script.js -->
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="timeline-section">
+            <div class="section-header">
+                <p class="section-subtitle font-label-mono" style="color: var(--primary);">// PROFESSIONAL_LOG</p>
+                <h2 class="section-title font-display-lg" style="margin-top: 8px;">OPERATIONAL<br>HISTORY</h2>
+                <p class="hero-description" style="margin-top: 24px; border: none; padding: 0; font-size: 16px; max-width: 650px;">
+                    A chronological record of deployments, focusing on software engineering infrastructure and security analysis protocols.
+                </p>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <!-- Item 1 (Right) -->
+                <div class="timeline-item right reveal-on-scroll">
+                    <div class="timeline-meta">
+                        <div class="timeline-date active">2024 - 2026</div>
+                        <div class="timeline-status">STATUS: ACTIVE</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <div class="card-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--outline)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                            </div>
+                            <h3 class="card-title">B.TECH - COMPUTER SCIENCE &<br>ENGINEERING 3RD YEAR STUDENT</h3>
+                            <div class="card-subtitle">CSPIT, CHARUSAT University // Changa, Gujarat</div>
+                            <div class="card-desc">
+                                <span class="prompt">&gt;&gt;</span> 1st Year CGPA: 7.32 | Specialization Interest: Cybersecurity
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-separator">SYSTEM UPDATE</div>
+
+                <!-- Item 2 (Left) -->
+                <div class="timeline-item left reveal-on-scroll">
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <div class="card-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--outline)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <h3 class="card-title">STUDENT COORDINATOR,<br>CYBERKAVACH CLUB</h3>
+                            <div class="card-subtitle">CHARUSAT</div>
+                            <div class="card-desc">
+                                <span class="prompt">&gt;&gt;</span> Active member and coordinator of CyberKavach, a university cybersecurity club focused on awareness, hands-on learning, and CTF-style challenges. Assist in organizing sessions, workshops, and outreach activities.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-meta">
+                        <div class="timeline-date active">PRESENT</div>
+                        <div class="timeline-status">STATUS: ACTIVE</div>
+                    </div>
+                </div>
+
+                <div class="timeline-separator">SYSTEM UPDATE</div>
+
+                <!-- Item 3 (Right) -->
+                <div class="timeline-item right reveal-on-scroll">
+                    <div class="timeline-meta">
+                        <div class="timeline-date">2 MEGA EVENTS</div>
+                        <div class="timeline-status">STATUS: COMPLETED</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <div class="card-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--outline)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            </div>
+                            <h3 class="card-title">EVENT COORDINATOR</h3>
+                            <div class="card-subtitle">300+ Participants</div>
+                            <div class="card-desc">
+                                <span class="prompt">&gt;&gt;</span> Co-ordinated two large-scale cybersecurity events with 300+ participants each. Managed end-to-end event logistics - scheduling, volunteer coordination, participant communication, and on-ground execution.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-separator">SYSTEM UPDATE</div>
+
+                <!-- Item 4 (Left) -->
+                <div class="timeline-item left reveal-on-scroll">
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <div class="card-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--outline)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v4l-4 5h8l-4 5v4H9z"/><path d="M10 21V10l3-4V3"/></svg>
+                            </div>
+                            <h3 class="card-title">CLASS 12 - SCIENCE (GSEB)</h3>
+                            <div class="card-subtitle">Modi School // Rajkot, Gujarat</div>
+                            <div class="card-desc">
+                                <span class="prompt">&gt;&gt;</span> Percentile: 95.46%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-meta">
+                        <div class="timeline-date">PASSED 2024</div>
+                        <div class="timeline-status">STATUS: COMPLETED</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Credentials Section -->
+        <section id="certifications" class="credentials-section">
+            <div class="section-header">
+                <p class="section-subtitle terminal-text" style="border: none; padding-left: 0; margin-bottom: 16px;">// CREDENTIALS_VERIFIED</p>
+                <h2 class="section-title" style="font-family: 'Anton', sans-serif; font-size: 40px; margin-top: 8px;">SECURITY CERTIFICATIONS</h2>
+                <p class="hero-description" style="border: none; padding: 0; font-size: 16px; margin-top: 24px; max-width: 650px;">Verified technical competencies in cloud infrastructure, penetration testing, and defensive security protocols. Data synchronized from credential issuing authorities.</p>
+            </div>
+
+            <div class="folder-wrapper folder-container">
+                <div class="folder">
+                    <div class="folder__back" id="dynamic-certificates-folder">
+                        <!-- Certificates will be dynamically loaded here by script.js -->
+                        <div class="folder__front"></div>
+                        <div class="folder__front right"></div>
+                    </div>
+                    <div class="folder-pagination" onclick="event.stopPropagation()">
+                        <button id="prev-cert-btn" class="btn-ghost" style="padding: 8px 16px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="vertical-align: middle; margin-right: 8px;" xmlns="http://www.w3.org/2000/svg"><path d="M15 19L8 12L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> PREV
+                        </button>
+                        <button id="next-cert-btn" class="btn-ghost" style="padding: 8px 16px;">
+                            NEXT <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="vertical-align: middle; margin-left: 8px;" xmlns="http://www.w3.org/2000/svg"><path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </div>
+                </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="contact-header">
+                <div class="status-indicator nominal">
+                    <span class="status-dot"></span>
+                    <span class="status-text" style="color: var(--primary);">ESTABLISH CONNECTION</span>
+                </div>
+                <h2 class="contact-title">INITIATE_CONTACT</h2>
+                <p class="contact-subtitle">System ready to receive incoming transmissions. Secure channel<br>established. Awaiting input parameters.</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Left Form -->
+                <div class="terminal-form">
+                    <div class="form-header">
+                        <span>TERMINAL_INPUT_V1.0</span>
+                        <div class="form-dots">
+                            <span></span><span></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label>&gt; ENTER NAME:</label>
+                            <input type="text" id="contact-name" name="name" placeholder="[YOUR_IDENTIFIER]" required>
+                        </div>
+                        <div class="form-group">
+                            <label>&gt; ENTER EMAIL:</label>
+                            <input type="email" id="contact-email" name="email" placeholder="[YOUR_COMMS_LINK]" required>
+                        </div>
+                        <div class="form-group">
+                            <label>&gt; TRANSMISSION:</label>
+                            <textarea id="contact-message" name="message" placeholder="[INPUT_DATA_STREAM...]" rows="4" required></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary" style="margin-left: auto;">
+                                EXECUTE SEND 
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#3a3000" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/></svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Right Links -->
+                <div class="contact-links-grid">
+                    <div class="link-card span-2 glow-bg">
+                        <div class="icon-circle">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20ZM12 19L8 15H10.5V12H13.5V15H16L12 19Z"></path></svg>
+                        </div>
+                        <h3>ACCESS_RESUME</h3>
+                        <p class="link-meta">PDF_PAYLOAD_V2.4.1</p>
+                        <a href="Dhruv_Khirsariya-Resume.pdf" target="_blank" class="btn-primary" style="width: 100%; margin-top: 16px;">DOWNLOAD FILE <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16L7 11L8.4 9.55L11 12.15V4H13V12.15L15.6 9.55L17 11L12 16ZM6 20C5.45 20 4.97917 19.8042 4.5875 19.4125C4.19583 19.0208 4 18.55 4 18V15H6V18H18V15H20V18C20 18.55 19.8042 19.0208 19.4125 19.4125C19.0208 19.8042 18.55 20 18 20H6Z" fill="#3a3000"/></svg></a>
+                    </div>
+                    <a href="https://github.com/KhirsariyaDhruv" target="_blank" class="link-card glow-bg">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--primary)"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                        <h4 class="link-label">GITHUB</h4>
+                    </a>
+                    <a href="https://www.linkedin.com/in/dhruv-khirsariya-b52b0131a" target="_blank" class="link-card glow-bg">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--primary)"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <h4 class="link-label">LINKEDIN</h4>
+                    </a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dhruvkhirsariya590@gmail.com" target="_blank" class="link-card span-2 glow-bg">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <h4 class="link-label">SECURE_EMAIL</h4>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                © 2026 TERMINAL_SYSTEMS // ALL RIGHTS RESERVED
+            </div>
+            <div class="footer-right">
+                <span style="color: var(--secondary);"><span class="status-dot"></span> Status: Nominal</span>
+                <span class="divider">//</span>
+                <span>Last Updated: 2024.05.21_14:30_UTC</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Local Data Fallback -->
+
+    <script src="liquid-ether-v2.js"></script>
+    <script src="pixel-snow.js"></script>
+    <script src="terminal-intro.js?v=4"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const liquidContainer = document.getElementById('liquid-ether-bg');
+            const snowContainer = document.getElementById('pixel-snow-bg');
+            
+            let liquidEtherInstance = null;
+            let pixelSnowInstance = null;
+
+            const initBackgrounds = () => {
+                const width = window.innerWidth;
+                const isMobile = width < 768;
+                const isTablet = width >= 768 && width < 1024;
+
+                if (isMobile) {
+                    liquidContainer.style.display = 'none';
+                    snowContainer.style.display = 'block';
+                    
+                    if (!pixelSnowInstance) {
+                        pixelSnowInstance = new PixelSnow(snowContainer, {
+                            color: '#FFD700', // Cyber Gold
+                            flakeSize: 0.015,
+                            minFlakeSize: 1.5,
+                            pixelResolution: 150,
+                            speed: 1.0,
+                            density: 0.4,
+                            variant: 'snowflake'
+                        });
+                    }
+                } else {
+                    snowContainer.style.display = 'none';
+                    liquidContainer.style.display = 'block';
+                    
+                    if (!liquidEtherInstance) {
+                        liquidEtherInstance = new LiquidEther(liquidContainer, {
+                            colors: ['#d4af37', '#00ff41', '#FF3366'],
+                            mouseForce: isTablet ? 12 : 15,
+                            cursorSize: isTablet ? 60 : 80,
+                            resolution: isTablet ? 0.25 : 0.15,
+                            iterationsPoisson: isTablet ? 12 : 16,
+                            iterationsViscous: isTablet ? 12 : 16,
+                            autoDemo: true,
+                            autoSpeed: 0.5
+                        });
+                    }
+                }
+            };
+
+            initBackgrounds();
+
+            // Re-check background engine if crossing the mobile boundary
+            let lastIsMobile = window.innerWidth < 768;
+            window.addEventListener('resize', () => {
+                const currentIsMobile = window.innerWidth < 768;
+                if (currentIsMobile !== lastIsMobile) {
+                    lastIsMobile = currentIsMobile;
+                    initBackgrounds();
+                }
+            });
+
+            // Initialize Terminal Form
+            const terminalForm = document.getElementById('contact-form');
+            if (terminalForm) {
+                terminalForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const btn = terminalForm.querySelector('.btn-primary');
+                    const originalText = btn.innerHTML;
+                    
+                    btn.innerHTML = 'EXECUTING...';
+                    btn.style.opacity = '0.7';
+                    btn.style.transition = 'all 0.3s';
+
+                    const formData = new FormData(terminalForm);
+
+                    fetch('api/contact.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            btn.innerHTML = 'TRANSMISSION COMPLETE';
+                            btn.style.backgroundColor = 'var(--secondary)';
+                            btn.style.color = 'var(--on-secondary)';
+                            btn.style.opacity = '1';
+                        } else {
+                            throw new Error(data.message || 'API Error');
+                        }
+                    })
+                    .catch(error => {
+                        btn.innerHTML = 'TRANSMISSION FAILED';
+                        btn.style.backgroundColor = 'var(--tertiary)';
+                        btn.style.color = 'var(--on-tertiary)';
+                        btn.style.opacity = '1';
+                        
+                        // Shake animation for error
+                        btn.animate([
+                            { transform: 'translateX(0)' },
+                            { transform: 'translateX(-10px)' },
+                            { transform: 'translateX(10px)' },
+                            { transform: 'translateX(-10px)' },
+                            { transform: 'translateX(10px)' },
+                            { transform: 'translateX(0)' }
+                        ], { duration: 400, easing: 'ease-in-out' });
+                    })
+                    .finally(() => {
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                            btn.style = '';
+                            if (btn.innerHTML === 'TRANSMISSION COMPLETE') {
+                                terminalForm.reset();
+                            }
+                        }, 3000);
+                    });
+                });
+            }
+        });
+    </script>
+    <script src="folder.js"></script>
+</body>
+</html>

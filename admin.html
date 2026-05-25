@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM ADMIN // KS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css?v=2">
+</head>
+<body>
+    <div id="liquid-ether-bg"></div>
+
+    <main class="admin-container">
+        <!-- LOGIN VIEW -->
+        <div id="login-view" class="admin-view active">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    </div>
+                    <div class="terminal-title">AUTH REQUIRED | KINETIC SENTINEL</div>
+                </div>
+                <div class="terminal-body">
+                    <h2 style="color: var(--primary); margin-bottom: 20px;">ADMINISTRATOR LOGIN</h2>
+                    <form id="admin-login-form">
+                        <div class="form-group">
+                            <label>&gt; USERNAME:</label>
+                            <input type="text" id="login-username" class="term-input-box" required>
+                        </div>
+                        <div class="form-group">
+                            <label>&gt; PASSWORD:</label>
+                            <input type="password" id="login-password" class="term-input-box" required>
+                        </div>
+                        <div id="login-error" style="color: var(--error); margin-bottom: 10px; display: none;"></div>
+                        <button type="submit" class="btn-primary" style="width: 100%;">AUTHENTICATE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- DASHBOARD VIEW -->
+        <div id="dashboard-view" class="admin-view">
+            <header class="admin-header">
+                <h2><span style="color: var(--primary);">//</span> SYSTEM ADMINISTRATOR</h2>
+                <button id="logout-btn" class="btn-ghost">LOGOUT <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></button>
+            </header>
+
+            <nav class="admin-tabs">
+                <button class="tab-btn active" data-tab="analytics">ANALYTICS</button>
+                <button class="tab-btn" data-tab="projects">PROJECTS</button>
+                <button class="tab-btn" data-tab="certificates">CERTIFICATES</button>
+                <button class="tab-btn" data-tab="messages">MESSAGES</button>
+            </nav>
+
+            <!-- Analytics Tab -->
+            <div id="tab-analytics" class="tab-content active">
+                <h3>RECENT VISITORS</h3>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>TIME</th>
+                                <th>NAME (TERM)</th>
+                                <th>CLEARANCE</th>
+                                <th>IP ADDRESS</th>
+                                <th>URL</th>
+                                <th>BROWSER</th>
+                            </tr>
+                        </thead>
+                        <tbody id="visitors-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Projects Tab -->
+            <div id="tab-projects" class="tab-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3>PROJECT DATABASE</h3>
+                    <button id="add-project-btn" class="btn-primary">ADD NEW</button>
+                </div>
+                
+                <!-- Add/Edit Project Form (Hidden by default) -->
+                <div id="project-form-container" class="admin-card" style="display: none; margin-bottom: 20px;">
+                    <h4 id="project-form-title">Add Project</h4>
+                    <form id="project-form">
+                        <input type="hidden" id="proj-id">
+                        <div class="form-grid">
+                            <div class="form-group"><label>Title</label><input type="text" id="proj-title" required class="term-input-box"></div>
+                            <div class="form-group"><label>Version</label><input type="text" id="proj-version" value="v1.0.0" class="term-input-box"></div>
+                            <div class="form-group"><label>Status Label</label><input type="text" id="proj-status" value="STATUS: ACTIVE" class="term-input-box"></div>
+                            <div class="form-group"><label>Tags (Comma separated)</label><input type="text" id="proj-tags" class="term-input-box"></div>
+                            <div class="form-group"><label>GitHub Link</label><input type="text" id="proj-code" value="#" class="term-input-box"></div>
+                            <div class="form-group"><label>Live Link</label><input type="text" id="proj-live" value="#" class="term-input-box"></div>
+                        </div>
+                        <div class="form-group" style="margin-top: 10px;">
+                            <label>Description</label>
+                            <textarea id="proj-desc" rows="4" required class="term-input-box" style="resize: vertical;"></textarea>
+                        </div>
+                        <div style="display: flex; gap: 10px; margin-top: 20px;">
+                            <button type="submit" class="btn-primary">SAVE</button>
+                            <button type="button" class="btn-ghost" onclick="document.getElementById('project-form-container').style.display='none'">CANCEL</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>TITLE</th>
+                                <th>VERSION</th>
+                                <th>TAGS</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projects-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Certificates Tab -->
+            <div id="tab-certificates" class="tab-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3>CERTIFICATE STORAGE</h3>
+                </div>
+
+                <div class="admin-card" style="margin-bottom: 20px;">
+                    <h4>Upload New Certificate</h4>
+                    <form id="cert-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" id="cert-title" required class="term-input-box">
+                        </div>
+                        <div class="form-group" style="margin-top: 10px;">
+                            <label>Image File (.png, .jpg)</label>
+                            <input type="file" id="cert-image" accept="image/*" required style="color: white; margin-top: 5px;">
+                        </div>
+                        <div id="cert-upload-status" style="margin-top:10px;"></div>
+                        <button type="submit" class="btn-primary" style="margin-top: 20px;">UPLOAD</button>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>PREVIEW</th>
+                                <th>TITLE</th>
+                                <th>PATH</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="certs-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Messages Tab -->
+            <div id="tab-messages" class="tab-content">
+                <h3>INCOMING TRANSMISSIONS</h3>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>DATE</th>
+                                <th>NAME</th>
+                                <th>EMAIL</th>
+                                <th>MESSAGE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="messages-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="admin.js?v=3"></script>
+</body>
+</html>
