@@ -26,16 +26,34 @@ if (!isAuthenticated()) {
 }
 
 if ($method === 'POST') {
-    // We are uploading a file, so we check $_FILES and $_POST
     $title = $_POST['title'] ?? '';
+    $imagePath = $_POST['image_path'] ?? '';
     
     if (empty($title)) {
         echo json_encode(["success" => false, "message" => "Title is required"]);
         exit;
     }
 
+    // Check if we are doing a manual image path insertion (e.g. for Vercel/serverless)
+    if (!empty($imagePath)) {
+        // Just save the specified path directly to the database
+        $stmt = $conn->prepare("INSERT INTO certificates (title, image_path) VALUES (:title, :image_path)");
+        $success = $stmt->execute([
+            'title' => $title,
+            'image_path' => $imagePath
+        ]);
+        
+        if ($success) {
+            echo json_encode(["success" => true, "message" => "Certificate saved successfully (Path registered)", "id" => $conn->lastInsertId()]);
+        } else {
+            echo json_encode(["success" => false, "message" => "Database error"]);
+        }
+        exit;
+    }
+
+    // Otherwise, perform the traditional file upload
     if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
-        echo json_encode(["success" => false, "message" => "Image upload failed"]);
+        echo json_encode(["success" => false, "message" => "Image upload failed. Please upload a file or enter an image path."]);
         exit;
     }
 
@@ -67,7 +85,7 @@ if ($method === 'POST') {
             echo json_encode(["success" => false, "message" => "Database error"]);
         }
     } else {
-        echo json_encode(["success" => false, "message" => "Failed to move uploaded file"]);
+        echo json_encode(["success" => false, "message" => "Failed to move uploaded file. Is the folder writable?"]);
     }
 }
 elseif ($method === 'DELETE') {

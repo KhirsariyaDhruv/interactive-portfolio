@@ -108,12 +108,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cert Form
     document.getElementById('cert-form').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('title', document.getElementById('cert-title').value);
-        formData.append('image', document.getElementById('cert-image').files[0]);
-
+        
+        const title = document.getElementById('cert-title').value;
+        const fileInput = document.getElementById('cert-image');
+        const pathInput = document.getElementById('cert-image-path');
         const statusText = document.getElementById('cert-upload-status');
-        statusText.textContent = "Uploading...";
+        
+        if (!fileInput.files[0] && !pathInput.value.trim()) {
+            statusText.textContent = "Please select a file or enter an image path.";
+            statusText.style.color = "var(--error)";
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('title', title);
+        
+        if (fileInput.files[0]) {
+            formData.append('image', fileInput.files[0]);
+        }
+        if (pathInput.value.trim()) {
+            formData.append('image_path', pathInput.value.trim());
+        }
+
+        statusText.textContent = "Saving certificate...";
         statusText.style.color = "var(--primary)";
 
         try {
@@ -132,7 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 statusText.style.color = "var(--error)";
             }
         } catch(e) {
-            statusText.textContent = "Upload failed.";
+            statusText.textContent = "Saving failed.";
+            statusText.style.color = "var(--error)";
         }
     });
 });
