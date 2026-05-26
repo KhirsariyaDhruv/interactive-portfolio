@@ -626,6 +626,7 @@
                         }
                     })
                     .catch(error => {
+                        console.error("Transmission Error Details:", error);
                         btn.innerHTML = 'TRANSMISSION FAILED';
                         btn.style.backgroundColor = 'var(--tertiary)';
                         btn.style.color = 'var(--on-tertiary)';
