@@ -11,10 +11,15 @@ function isAuthenticated() {
 $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method === 'GET') {
-    // Anyone can read projects
-    $stmt = $conn->query("SELECT * FROM projects ORDER BY id DESC");
-    $projects = $stmt->fetchAll();
-    echo json_encode(["success" => true, "data" => $projects]);
+    try {
+        // Anyone can read projects
+        $stmt = $conn->query("SELECT * FROM projects ORDER BY id DESC");
+        $projects = $stmt->fetchAll();
+        echo json_encode(["success" => true, "data" => $projects]);
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(["success" => false, "message" => "Database query failed: " . $e->getMessage()]);
+    }
     exit;
 }
 
