@@ -29,7 +29,7 @@ A highly interactive, terminal-inspired developer portfolio designed to mimic a 
 
 2. **Database Configuration**
    * Ensure you have a local server environment (like XAMPP, MAMP, or WAMP) running.
-   * Create a new MySQL database named `portfolio`.
+   * Create a new MySQL database named `portfolio_db`.
    * Import the provided `database_setup.sql` file into your MySQL server to set up the necessary tables (`visitor_logs`, `projects`, `messages`, `certificates`, etc.).
    * Update `api/db_connect.php` with your database credentials if they differ from the default XAMPP settings (`root` / no password).
 

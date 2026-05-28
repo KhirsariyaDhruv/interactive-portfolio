@@ -190,24 +190,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Fetch Certificates
     const certsFolder = document.getElementById('dynamic-certificates-folder');
-    if (certsFolder) {
+    
+    function displayCertificates(data) {
+        window.certificatesData = data;
+        window.currentCertPage = 0;
+        renderCertificates();
+    }
+    
+    function loadFallbackCertificates() {
         if (window.CERT_IMAGES && window.CERT_IMAGES.length > 0) {
-            // Local fallback data available
-            window.certificatesData = window.CERT_IMAGES.map(img => ({ image_path: img }));
-            window.currentCertPage = 0;
-            renderCertificates();
+            displayCertificates(window.CERT_IMAGES.map(img => ({ image_path: img })));
         } else {
-            fetch('api/certificates.php')
-                .then(res => res.json())
-                .then(json => {
-                    if(json.success && json.data.length > 0) {
-                        window.certificatesData = json.data;
-                        window.currentCertPage = 0;
-                        renderCertificates();
-                    }
-                })
-                .catch(e => console.error("Error loading certificates:", e));
+            console.log("No fallback certificates available.");
         }
+    }
+
+    if (certsFolder) {
+        fetch('api/certificates.php')
+            .then(res => res.json())
+            .then(json => {
+                if (json.success && json.data && json.data.length > 0) {
+                    displayCertificates(json.data);
+                } else {
+                    console.log("No certificates found in database or database connection failed. Loading fallback certificates.");
+                    loadFallbackCertificates();
+                }
+            })
+            .catch(e => {
+                console.error("Error loading certificates from database, loading fallback certificates:", e);
+                loadFallbackCertificates();
+            });
     }
 
     function renderCertificates() {
@@ -232,7 +244,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const folder = folderContainer.closest('.folder');
                 if (folder.classList.contains('open')) {
                     e.stopPropagation();
-                    openCertModal(c.image_path);
+                    const modal = document.querySelector('.cert-modal');
+                    if (modal) {
+                        const modalImg = modal.querySelector('.cert-modal-img');
+                        if (modalImg) {
+                            modalImg.src = c.image_path;
+                        }
+                        modal.classList.add('active');
+                    }
                 }
             };
             
@@ -307,58 +326,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Certificate Modal Logic
-function openCertModal(imageSrc) {
-    // Check if modal exists
-    let modal = document.getElementById('cert-modal');
-    if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'cert-modal';
-        modal.style.position = 'fixed';
-        modal.style.top = '0';
-        modal.style.left = '0';
-        modal.style.width = '100vw';
-        modal.style.height = '100vh';
-        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-        modal.style.backdropFilter = 'blur(10px)';
-        modal.style.zIndex = '9999';
-        modal.style.display = 'flex';
-        modal.style.alignItems = 'center';
-        modal.style.justifyContent = 'center';
-        modal.style.opacity = '0';
-        modal.style.transition = 'opacity 0.3s ease';
-        modal.style.cursor = 'zoom-out';
-        
-        const img = document.createElement('img');
-        img.id = 'cert-modal-img';
-        img.style.maxWidth = '90%';
-        img.style.maxHeight = '90%';
-        img.style.objectFit = 'contain';
-        img.style.border = '2px solid var(--primary)';
-        img.style.boxShadow = '0 0 30px rgba(255, 215, 0, 0.2)';
-        img.style.transform = 'scale(0.9)';
-        img.style.transition = 'transform 0.3s ease';
-        
-        modal.appendChild(img);
-        
-        // Close on click
-        modal.onclick = () => {
-            modal.style.opacity = '0';
-            img.style.transform = 'scale(0.9)';
-            setTimeout(() => { modal.style.display = 'none'; }, 300);
-        };
-        
-        document.body.appendChild(modal);
-    }
-    
-    // Set image and show
-    const imgElement = document.getElementById('cert-modal-img');
-    imgElement.src = imageSrc;
-    modal.style.display = 'flex';
-    
-    // Trigger animation
-    requestAnimationFrame(() => {
-        modal.style.opacity = '1';
-        imgElement.style.transform = 'scale(1)';
-    });
-}
+// Certificate Modal Logic is handled in folder.js and triggered via paper click
