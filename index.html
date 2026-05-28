@@ -616,7 +616,6 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert("Message sent successfully!");
                             terminalForm.reset();
                         } else {
                             throw new Error(data.message || 'API Error');
@@ -624,7 +623,6 @@
                     })
                     .catch(error => {
                         console.error("Transmission Error Details:", error);
-                        alert("Transmission failed. Please check your database connection or try again.");
                     })
                     .finally(() => {
                         btn.innerHTML = originalText;
