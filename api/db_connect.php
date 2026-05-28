@@ -8,6 +8,8 @@ if ($is_localhost) {
     $db_name = 'portfolio_db';
     $username = 'root'; // Default XAMPP username
     $password = '';     // Default XAMPP password (empty)
+    $port = '3306';
+    $options = [];
 } else {
     // Live Server Credentials - Reads from Environment Variables (Vercel / Render)
     // or falls back to your manual config if environment variables are not set.
@@ -15,10 +17,14 @@ if ($is_localhost) {
     $db_name = getenv('DB_NAME') ?: 'YOUR_DB_NAME';
     $username = getenv('DB_USER') ?: 'YOUR_DB_USERNAME';
     $password = getenv('DB_PASS') ?: 'YOUR_DB_PASSWORD';
+    $port = getenv('DB_PORT') ?: '3306';
+    $options = [
+        1014 => false // 1014 is PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT
+    ];
 }
 
 try {
-    $conn = new PDO("mysql:host=$host;dbname=$db_name;charset=utf8mb4", $username, $password);
+    $conn = new PDO("mysql:host=$host;port=$port;dbname=$db_name;charset=utf8mb4", $username, $password, $options);
     // Set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // Set default fetch mode to associative array
