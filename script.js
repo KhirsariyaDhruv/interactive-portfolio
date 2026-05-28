@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!projectsGrid) return;
         projectsGrid.innerHTML = '';
         data.forEach(p => {
-            const tagsHtml = p.tags.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join('');
+            const tagsHtml = (p.tags || '').split(',').filter(tag => tag.trim() !== '').map(tag => `<span class="tag">${tag.trim()}</span>`).join('');
             
             projectsGrid.innerHTML += `
                 <div class="project-card">
