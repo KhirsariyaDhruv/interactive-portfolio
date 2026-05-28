@@ -48,5 +48,27 @@ elseif ($method === 'POST') {
     
     // Don't send back errors for tracking pixel to avoid exposing backend
     echo json_encode(["success" => true]);
+} elseif ($method === 'DELETE') {
+    // Delete a log (requires auth)
+    if (!isAuthenticated()) {
+        http_response_code(401);
+        echo json_encode(["success" => false, "message" => "Unauthorized"]);
+        exit;
+    }
+    
+    $data = json_decode(file_get_contents('php://input'), true);
+    $id = $data['id'] ?? null;
+    
+    if (!$id) {
+        http_response_code(400);
+        echo json_encode(["success" => false, "message" => "Missing ID"]);
+        exit;
+    }
+    
+    $stmt = $conn->prepare("DELETE FROM visitor_logs WHERE id = :id");
+    $success = $stmt->execute(['id' => $id]);
+    
+    echo json_encode(["success" => $success]);
+    exit;
 }
 ?>

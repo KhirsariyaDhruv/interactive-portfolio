@@ -189,9 +189,28 @@ async function fetchVisitors() {
                     <td>${v.ip_address}</td>
                     <td>${v.page_url}</td>
                     <td style="font-size:12px; color:var(--outline); max-width: 200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${v.user_agent}">${v.user_agent}</td>
+                    <td>
+                        <button class="action-link delete" onclick="deleteVisitor(${v.id})">Delete</button>
+                    </td>
                 </tr>
             `;
         });
+    }
+}
+
+window.deleteVisitor = async function(id) {
+    if(confirm('Delete this visitor log?')) {
+        const res = await fetch('api/track_visitor.php', { 
+            method: 'DELETE', 
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id}) 
+        });
+        const data = await res.json();
+        if(data.success) {
+            fetchVisitors();
+        } else {
+            alert('Failed to delete: ' + (data.message || 'Unknown error'));
+        }
     }
 }
 
