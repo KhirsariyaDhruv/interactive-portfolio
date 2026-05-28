@@ -119,39 +119,73 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- DYNAMIC DATA FETCHING & TRACKING ---
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 2. Fetch Projects
+    // 2. Fetch Projects with Fallback Data
     const projectsGrid = document.getElementById('dynamic-projects-grid');
+    const fallbackProjects = [
+        {
+            title: "POS Billing System",
+            version: "v1.0.0",
+            status: "STATUS: OPERATIONAL // RETAIL SOLUTION",
+            description: "A full-featured Point of Sale billing system designed for provision stores. Handles product management, invoice generation, and real-time sales tracking with a clean browser-based interface.",
+            tags: "HTML,CSS,JAVASCRIPT,PHP,PHPMYADMIN",
+            folder_link: "#",
+            code_link: "#",
+            live_link: "https://hitanshparikh.tech/pos/"
+        },
+        {
+            title: "Autonomous Rover",
+            version: "v1.2.0",
+            status: "STATUS: ACTIVE // HARDWARE & ROBOTICS",
+            description: "A remotely operated rover built on Raspberry Pi 5 with Arduino-based motor control. Uses servo motors for directional movement and encoders for precise speed and distance feedback, enabling obstacle avoidance.",
+            tags: "ARDUINO IDE,RASPBERRY PI 5,SERVO MOTOR,ENCODER",
+            folder_link: "#",
+            code_link: "#",
+            live_link: "#"
+        }
+    ];
+
+    function displayProjects(data) {
+        if (!projectsGrid) return;
+        projectsGrid.innerHTML = '';
+        data.forEach(p => {
+            const tagsHtml = p.tags.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join('');
+            
+            projectsGrid.innerHTML += `
+                <div class="project-card">
+                    <div class="project-version">${p.version}</div>
+                    <div class="project-header">
+                        <h3 class="project-title"><a href="${p.live_link !== '#' ? p.live_link : '#'}" target="_blank" style="color: inherit; text-decoration: none;">${p.title}</a></h3>
+                        <div class="project-links">
+                            <a href="${p.folder_link}" aria-label="Folder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></a>
+                            <a href="${p.code_link}" aria-label="Code"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></a>
+                            <a href="${p.live_link}" target="_blank" aria-label="External Link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                        </div>
+                    </div>
+                    <div class="project-status">${p.status}</div>
+                    <p class="project-desc">${p.description}</p>
+                    <div class="project-tags">
+                        ${tagsHtml}
+                    </div>
+                </div>
+            `;
+        });
+    }
+
     if (projectsGrid) {
         fetch('api/projects.php')
             .then(res => res.json())
             .then(json => {
-                if(json.success && json.data.length > 0) {
-                    projectsGrid.innerHTML = '';
-                    json.data.forEach(p => {
-                        const tagsHtml = p.tags.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join('');
-                        
-                        projectsGrid.innerHTML += `
-                            <div class="project-card">
-                                <div class="project-version">${p.version}</div>
-                                <div class="project-header">
-                                    <h3 class="project-title"><a href="${p.live_link !== '#' ? p.live_link : '#'}" target="_blank" style="color: inherit; text-decoration: none;">${p.title}</a></h3>
-                                    <div class="project-links">
-                                        <a href="${p.folder_link}" aria-label="Folder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></a>
-                                        <a href="${p.code_link}" aria-label="Code"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></a>
-                                        <a href="${p.live_link}" target="_blank" aria-label="External Link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                                    </div>
-                                </div>
-                                <div class="project-status">${p.status}</div>
-                                <p class="project-desc">${p.description}</p>
-                                <div class="project-tags">
-                                    ${tagsHtml}
-                                </div>
-                            </div>
-                        `;
-                    });
+                if (json.success && json.data && json.data.length > 0) {
+                    displayProjects(json.data);
+                } else {
+                    console.log("No projects found in database or database connection failed. Loading fallback projects.");
+                    displayProjects(fallbackProjects);
                 }
             })
-            .catch(e => console.error("Error loading projects:", e));
+            .catch(e => {
+                console.error("Error loading projects from database, loading fallback projects:", e);
+                displayProjects(fallbackProjects);
+            });
     }
 
     // 3. Fetch Certificates
