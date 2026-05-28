@@ -606,7 +606,6 @@
                     
                     btn.innerHTML = 'EXECUTING...';
                     btn.style.opacity = '0.7';
-                    btn.style.transition = 'all 0.3s';
 
                     const formData = new FormData(terminalForm);
 
@@ -617,39 +616,19 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            btn.innerHTML = 'TRANSMISSION COMPLETE';
-                            btn.style.backgroundColor = 'var(--secondary)';
-                            btn.style.color = 'var(--on-secondary)';
-                            btn.style.opacity = '1';
+                            alert("Message sent successfully!");
+                            terminalForm.reset();
                         } else {
                             throw new Error(data.message || 'API Error');
                         }
                     })
                     .catch(error => {
                         console.error("Transmission Error Details:", error);
-                        btn.innerHTML = 'TRANSMISSION FAILED';
-                        btn.style.backgroundColor = 'var(--tertiary)';
-                        btn.style.color = 'var(--on-tertiary)';
-                        btn.style.opacity = '1';
-                        
-                        // Shake animation for error
-                        btn.animate([
-                            { transform: 'translateX(0)' },
-                            { transform: 'translateX(-10px)' },
-                            { transform: 'translateX(10px)' },
-                            { transform: 'translateX(-10px)' },
-                            { transform: 'translateX(10px)' },
-                            { transform: 'translateX(0)' }
-                        ], { duration: 400, easing: 'ease-in-out' });
+                        alert("Transmission failed. Please check your database connection or try again.");
                     })
                     .finally(() => {
-                        setTimeout(() => {
-                            btn.innerHTML = originalText;
-                            btn.style = '';
-                            if (btn.innerHTML === 'TRANSMISSION COMPLETE') {
-                                terminalForm.reset();
-                            }
-                        }, 3000);
+                        btn.innerHTML = originalText;
+                        btn.style.opacity = '1';
                     });
                 });
             }
