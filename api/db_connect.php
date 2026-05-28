@@ -36,4 +36,22 @@ try {
         "message" => "Database Connection Failed: " . $e->getMessage()
     ]));
 }
+
+function isAuthenticated() {
+    $token = $_COOKIE['admin_token'] ?? '';
+    if (empty($token)) {
+        return false;
+    }
+    $decoded = json_decode(base64_decode($token), true);
+    if (!$decoded || !isset($decoded['username']) || !isset($decoded['expiry']) || !isset($decoded['signature'])) {
+        return false;
+    }
+    if (time() > $decoded['expiry']) {
+        return false;
+    }
+    $secret = getenv('JWT_SECRET') ?: 'some_default_secure_secret_key_123';
+    $expectedSignature = hash_hmac('sha256', $decoded['username'] . '|' . $decoded['expiry'], $secret);
+    
+    return hash_equals($expectedSignature, $decoded['signature']);
+}
 ?>
