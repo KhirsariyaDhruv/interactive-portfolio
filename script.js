@@ -119,61 +119,107 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- DYNAMIC DATA FETCHING & TRACKING ---
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 2. Fetch Projects
+    // 2. Fetch Projects with Fallback Data
     const projectsGrid = document.getElementById('dynamic-projects-grid');
+    const fallbackProjects = [
+        {
+            title: "POS Billing System",
+            version: "v1.0.0",
+            status: "STATUS: OPERATIONAL // RETAIL SOLUTION",
+            description: "A full-featured Point of Sale billing system designed for provision stores. Handles product management, invoice generation, and real-time sales tracking with a clean browser-based interface.",
+            tags: "HTML,CSS,JAVASCRIPT,PHP,PHPMYADMIN",
+            folder_link: "#",
+            code_link: "#",
+            live_link: "https://hitanshparikh.tech/pos/"
+        },
+        {
+            title: "Autonomous Rover",
+            version: "v1.2.0",
+            status: "STATUS: ACTIVE // HARDWARE & ROBOTICS",
+            description: "A remotely operated rover built on Raspberry Pi 5 with Arduino-based motor control. Uses servo motors for directional movement and encoders for precise speed and distance feedback, enabling obstacle avoidance.",
+            tags: "ARDUINO IDE,RASPBERRY PI 5,SERVO MOTOR,ENCODER",
+            folder_link: "#",
+            code_link: "#",
+            live_link: "#"
+        }
+    ];
+
+    function displayProjects(data) {
+        if (!projectsGrid) return;
+        projectsGrid.innerHTML = '';
+        data.forEach(p => {
+            const tagsHtml = (p.tags || '').split(',').filter(tag => tag.trim() !== '').map(tag => `<span class="tag">${tag.trim()}</span>`).join('');
+            
+            projectsGrid.innerHTML += `
+                <div class="project-card">
+                    <div class="project-version">${p.version}</div>
+                    <div class="project-header">
+                        <h3 class="project-title"><a href="${p.live_link !== '#' ? p.live_link : '#'}" target="_blank" style="color: inherit; text-decoration: none;">${p.title}</a></h3>
+                        <div class="project-links">
+                            <a href="${p.folder_link}" aria-label="Folder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></a>
+                            <a href="${p.code_link}" aria-label="Code"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></a>
+                            <a href="${p.live_link}" target="_blank" aria-label="External Link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                        </div>
+                    </div>
+                    <div class="project-status">${p.status}</div>
+                    <p class="project-desc">${p.description}</p>
+                    <div class="project-tags">
+                        ${tagsHtml}
+                    </div>
+                </div>
+            `;
+        });
+    }
+
     if (projectsGrid) {
         fetch('api/projects.php')
             .then(res => res.json())
             .then(json => {
-                if(json.success && json.data.length > 0) {
-                    projectsGrid.innerHTML = '';
-                    json.data.forEach(p => {
-                        const tagsHtml = p.tags.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join('');
-                        
-                        projectsGrid.innerHTML += `
-                            <div class="project-card">
-                                <div class="project-version">${p.version}</div>
-                                <div class="project-header">
-                                    <h3 class="project-title"><a href="${p.live_link !== '#' ? p.live_link : '#'}" target="_blank" style="color: inherit; text-decoration: none;">${p.title}</a></h3>
-                                    <div class="project-links">
-                                        <a href="${p.folder_link}" aria-label="Folder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></a>
-                                        <a href="${p.code_link}" aria-label="Code"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></a>
-                                        <a href="${p.live_link}" target="_blank" aria-label="External Link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                                    </div>
-                                </div>
-                                <div class="project-status">${p.status}</div>
-                                <p class="project-desc">${p.description}</p>
-                                <div class="project-tags">
-                                    ${tagsHtml}
-                                </div>
-                            </div>
-                        `;
-                    });
+                if (json.success && json.data && json.data.length > 0) {
+                    displayProjects(json.data);
+                } else {
+                    console.log("No projects found in database or database connection failed. Loading fallback projects.");
+                    displayProjects(fallbackProjects);
                 }
             })
-            .catch(e => console.error("Error loading projects:", e));
+            .catch(e => {
+                console.error("Error loading projects from database, loading fallback projects:", e);
+                displayProjects(fallbackProjects);
+            });
     }
 
     // 3. Fetch Certificates
     const certsFolder = document.getElementById('dynamic-certificates-folder');
-    if (certsFolder) {
+    
+    function displayCertificates(data) {
+        window.certificatesData = data;
+        window.currentCertPage = 0;
+        renderCertificates();
+    }
+    
+    function loadFallbackCertificates() {
         if (window.CERT_IMAGES && window.CERT_IMAGES.length > 0) {
-            // Local fallback data available
-            window.certificatesData = window.CERT_IMAGES.map(img => ({ image_path: img }));
-            window.currentCertPage = 0;
-            renderCertificates();
+            displayCertificates(window.CERT_IMAGES.map(img => ({ image_path: img })));
         } else {
-            fetch('api/certificates.php')
-                .then(res => res.json())
-                .then(json => {
-                    if(json.success && json.data.length > 0) {
-                        window.certificatesData = json.data;
-                        window.currentCertPage = 0;
-                        renderCertificates();
-                    }
-                })
-                .catch(e => console.error("Error loading certificates:", e));
+            console.log("No fallback certificates available.");
         }
+    }
+
+    if (certsFolder) {
+        fetch('api/certificates.php')
+            .then(res => res.json())
+            .then(json => {
+                if (json.success && json.data && json.data.length > 0) {
+                    displayCertificates(json.data);
+                } else {
+                    console.log("No certificates found in database or database connection failed. Loading fallback certificates.");
+                    loadFallbackCertificates();
+                }
+            })
+            .catch(e => {
+                console.error("Error loading certificates from database, loading fallback certificates:", e);
+                loadFallbackCertificates();
+            });
     }
 
     function renderCertificates() {
@@ -198,7 +244,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const folder = folderContainer.closest('.folder');
                 if (folder.classList.contains('open')) {
                     e.stopPropagation();
-                    openCertModal(c.image_path);
+                    const modal = document.querySelector('.cert-modal');
+                    if (modal) {
+                        const modalImg = modal.querySelector('.cert-modal-img');
+                        if (modalImg) {
+                            modalImg.src = c.image_path;
+                        }
+                        modal.classList.add('active');
+                    }
                 }
             };
             
@@ -273,58 +326,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Certificate Modal Logic
-function openCertModal(imageSrc) {
-    // Check if modal exists
-    let modal = document.getElementById('cert-modal');
-    if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'cert-modal';
-        modal.style.position = 'fixed';
-        modal.style.top = '0';
-        modal.style.left = '0';
-        modal.style.width = '100vw';
-        modal.style.height = '100vh';
-        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-        modal.style.backdropFilter = 'blur(10px)';
-        modal.style.zIndex = '9999';
-        modal.style.display = 'flex';
-        modal.style.alignItems = 'center';
-        modal.style.justifyContent = 'center';
-        modal.style.opacity = '0';
-        modal.style.transition = 'opacity 0.3s ease';
-        modal.style.cursor = 'zoom-out';
-        
-        const img = document.createElement('img');
-        img.id = 'cert-modal-img';
-        img.style.maxWidth = '90%';
-        img.style.maxHeight = '90%';
-        img.style.objectFit = 'contain';
-        img.style.border = '2px solid var(--primary)';
-        img.style.boxShadow = '0 0 30px rgba(255, 215, 0, 0.2)';
-        img.style.transform = 'scale(0.9)';
-        img.style.transition = 'transform 0.3s ease';
-        
-        modal.appendChild(img);
-        
-        // Close on click
-        modal.onclick = () => {
-            modal.style.opacity = '0';
-            img.style.transform = 'scale(0.9)';
-            setTimeout(() => { modal.style.display = 'none'; }, 300);
-        };
-        
-        document.body.appendChild(modal);
-    }
-    
-    // Set image and show
-    const imgElement = document.getElementById('cert-modal-img');
-    imgElement.src = imageSrc;
-    modal.style.display = 'flex';
-    
-    // Trigger animation
-    requestAnimationFrame(() => {
-        modal.style.opacity = '1';
-        imgElement.style.transform = 'scale(1)';
-    });
-}
+// Certificate Modal Logic is handled in folder.js and triggered via paper click

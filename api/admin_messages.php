@@ -1,15 +1,13 @@
 <?php
-session_start();
+require_once 'db_connect.php';
 header('Content-Type: application/json');
 
 // Check authentication
-if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+if (!isAuthenticated()) {
     http_response_code(401);
     echo json_encode(["status" => "error", "message" => "Unauthorized access."]);
     exit;
 }
-
-require_once 'db_connect.php';
 
 try {
     // Check if table exists (in case admin opens messages before first message is sent)

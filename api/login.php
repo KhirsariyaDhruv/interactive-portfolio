@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'db_connect.php';
 
 header('Content-Type: application/json');
@@ -31,20 +30,43 @@ if ($method === 'POST') {
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password_hash'])) {
-            // Success
-            $_SESSION['admin_logged_in'] = true;
-            $_SESSION['admin_id'] = $user['id'];
+            // Success - Create token and set cookie
+            $secret = getenv('JWT_SECRET') ?: 'some_default_secure_secret_key_123';
+            $expiry = time() + 86400 * 7; // 7 days
+            $signature = hash_hmac('sha256', $username . '|' . $expiry, $secret);
+            $token = base64_encode(json_encode([
+                'username' => $username,
+                'expiry' => $expiry,
+                'signature' => $signature
+            ]));
+            
+            $is_localhost = in_array($_SERVER['HTTP_HOST'], ['localhost', '127.0.0.1', '[::1]']);
+            setcookie('admin_token', $token, [
+                'expires' => $expiry,
+                'path' => '/',
+                'secure' => !$is_localhost,
+                'httponly' => true,
+                'samesite' => 'Lax'
+            ]);
+            
             echo json_encode(["success" => true, "message" => "Login successful"]);
         } else {
             echo json_encode(["success" => false, "message" => "Invalid credentials"]);
         }
     } 
     else if ($action === 'logout') {
-        session_destroy();
+        $is_localhost = in_array($_SERVER['HTTP_HOST'], ['localhost', '127.0.0.1', '[::1]']);
+        setcookie('admin_token', '', [
+            'expires' => time() - 3600,
+            'path' => '/',
+            'secure' => !$is_localhost,
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]);
         echo json_encode(["success" => true, "message" => "Logged out"]);
     }
     else if ($action === 'check') {
-        if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
+        if (isAuthenticated()) {
             echo json_encode(["success" => true, "message" => "Authenticated"]);
         } else {
             echo json_encode(["success" => false, "message" => "Not authenticated"]);
